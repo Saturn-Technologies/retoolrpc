@@ -22,7 +22,7 @@ preview = true
 src = ["retoolrpc"]
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 orjson = "^3.10.0"
 pydantic = "^1.10.2"
 typer = "^0.13.0"
