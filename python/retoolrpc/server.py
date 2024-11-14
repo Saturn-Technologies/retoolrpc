@@ -18,6 +18,7 @@ from retoolrpc.util.serialization import safe_dict
 
 class RetoolRPC:
     functions: list[RetoolFunction]
+    pre_start: typing.Callable | None = None
 
     def __init__(
         self,
@@ -36,9 +37,11 @@ class RetoolRPC:
         self.polling_interval_ms = polling_interval_ms
         self.log_level = log_level
         self.functions = []
+        self.pre_start = None
 
-    def pre_start(self):
-        pass
+    def on_start(self, function: typing.Callable):
+        self.pre_start = function
+        return function
 
     @classmethod
     def _resolve_type(cls, object: dict) -> RetoolArgumentTypes:

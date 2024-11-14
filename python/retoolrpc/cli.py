@@ -19,7 +19,9 @@ def run(application_path: str, host: str) -> None:
 
     # Build host:port string add http:// if not present
     host = f"https://{host}" if not host.startswith("http") else host
-    application.pre_start()
+
+    if application.pre_start:
+        application.pre_start()
 
     rpc_config = RetoolRPCConfig(
         api_token=application.api_key,
