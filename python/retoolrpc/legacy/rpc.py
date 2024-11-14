@@ -3,13 +3,16 @@ import datetime
 import uuid
 from typing import Any, Dict, Literal, Optional
 
-from retoolrpc.utils.api import RetoolAPI
-from retoolrpc.utils.errors import FunctionNotFoundError, create_agent_server_error
-from retoolrpc.utils.helpers import is_client_error
-from retoolrpc.utils.logger import Logger
-from retoolrpc.utils.polling import loop_with_backoff
-from retoolrpc.utils.schema import parse_function_arguments
-from retoolrpc.utils.types import (
+from retoolrpc.legacy.utils.api import RetoolAPI
+from retoolrpc.legacy.utils.errors import (
+    FunctionNotFoundError,
+    create_agent_server_error,
+)
+from retoolrpc.legacy.utils.helpers import is_client_error
+from retoolrpc.legacy.utils.logger import Logger
+from retoolrpc.legacy.utils.polling import loop_with_backoff
+from retoolrpc.legacy.utils.schema import parse_function_arguments
+from retoolrpc.legacy.utils.types import (
     AgentServerError,
     AgentServerStatus,
     FunctionSpecWithoutName,
@@ -17,7 +20,7 @@ from retoolrpc.utils.types import (
     RetoolContext,
     RetoolRPCConfig,
 )
-from retoolrpc.version import __version__
+from retoolrpc.legacy.version import __version__
 
 MINIMUM_POLLING_INTERVAL_MS = 100
 DEFAULT_POLLING_INTERVAL_MS = 1000

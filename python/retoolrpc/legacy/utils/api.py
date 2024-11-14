@@ -1,8 +1,8 @@
 from typing import Any, Dict, Literal, Optional, TypedDict
 
 import httpx
-from retoolrpc.utils.types import AgentServerError
-from retoolrpc.version import __version__
+from retoolrpc.legacy.utils.types import AgentServerError
+from retoolrpc.legacy.version import __version__
 
 
 class PopQueryRequest(TypedDict):

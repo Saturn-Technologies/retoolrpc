@@ -1,8 +1,8 @@
 import time
 from typing import Awaitable, Callable
 
-from retoolrpc.utils.logger import Logger
-from retoolrpc.utils.types import AgentServerStatus
+from retoolrpc.legacy.utils.logger import Logger
+from retoolrpc.legacy.utils.types import AgentServerStatus
 
 CONNECTION_ERROR_INITIAL_TIMEOUT_MS = 50  # 50 milliseconds
 CONNECTION_ERROR_RETRY_MAX_MS = 1000 * 60 * 10  # 10 minutes

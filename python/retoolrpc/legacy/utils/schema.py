@@ -1,13 +1,13 @@
 from typing import Any, Dict, List, Tuple
 
-from retoolrpc.utils.errors import InvalidArgumentsError
-from retoolrpc.utils.helpers import (
+from retoolrpc.legacy.utils.errors import InvalidArgumentsError
+from retoolrpc.legacy.utils.helpers import (
     is_boolean_string,
     is_falsy_argument_value,
     is_json_value,
     is_number_string,
 )
-from retoolrpc.utils.types import Arguments, ArgumentType
+from retoolrpc.legacy.utils.types import Arguments, ArgumentType
 
 
 class ArgumentParser:

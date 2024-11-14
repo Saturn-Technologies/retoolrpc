@@ -6,13 +6,13 @@ import pytest
 import toml
 from pytest_httpx import HTTPXMock
 from retoolrpc import RetoolRPC
-from retoolrpc.utils.errors import InvalidArgumentsError
-from retoolrpc.utils.schema import parse_function_arguments
-from retoolrpc.utils.types import (
+from retoolrpc.legacy.utils.errors import InvalidArgumentsError
+from retoolrpc import parse_function_arguments
+from retoolrpc.legacy.utils.types import (
     RetoolContext,
     RetoolRPCConfig,
 )
-from retoolrpc.version import __version__
+from retoolrpc import __version__
 
 CURRENT_DATE = datetime(2012, 12, 21)
 RESOURCE_ID = str(uuid4())

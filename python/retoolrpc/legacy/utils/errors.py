@@ -1,6 +1,6 @@
 import traceback
 
-from retoolrpc.utils.types import AgentServerError
+from retoolrpc.legacy.utils.types import AgentServerError
 
 AGENT_SERVER_ERROR = "AgentServerError"
 FUNCTION_NOT_FOUND_ERROR = "FunctionNotFoundError"
