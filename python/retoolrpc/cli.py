@@ -19,6 +19,7 @@ def run(application_path: str, host: str) -> None:
 
     # Build host:port string add http:// if not present
     host = f"https://{host}" if not host.startswith("http") else host
+    application.pre_start()
 
     rpc_config = RetoolRPCConfig(
         api_token=application.api_key,
@@ -30,7 +31,6 @@ def run(application_path: str, host: str) -> None:
         log_level=application.log_level,
     )
     rpc = LegacyRPC(rpc_config)
-
     for function in application.functions:
         rpc.register(function)
     asyncio.run(rpc.listen())

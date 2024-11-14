@@ -37,6 +37,9 @@ class RetoolRPC:
         self.log_level = log_level
         self.functions = []
 
+    def pre_start(self):
+        pass
+
     @classmethod
     def _resolve_type(cls, object: dict) -> RetoolArgumentTypes:
         # Item is an array, resolve the inner type of the array
