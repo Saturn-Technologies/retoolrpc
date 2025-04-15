@@ -44,12 +44,14 @@ class RetoolRPC:
         return function
 
     @classmethod
-    def _resolve_type(cls, object: dict) -> RetoolArgumentTypes:
+    def _resolve_type(cls, object: dict, schema: dict) -> RetoolArgumentTypes:
         # Item is an array, resolve the inner type of the array
         if object.get("type") == "array":
-            return cls._resolve_type(object.get("items"))
+            return cls._resolve_type(object.get("items"), schema)
         # Item has a type, resolve it
         if object_type := object.get("type"):
+            if object_type == 'object':
+                return "dict"
             if object_type == "integer":
                 return "number"
             allowed_values = typing.get_args(RetoolArgumentTypes)
@@ -57,7 +59,12 @@ class RetoolRPC:
                 return object_type
         # Items is a reference to another type, assume it's a dict
         elif object.get("$ref"):
+            reference_address = object.get("$ref").split("/")[-1]
+            if reference_address in schema.get("definitions", {}):
+                return cls._resolve_type(schema.get("definitions")[reference_address], schema)
             return "dict"
+        elif object.get("enum"):
+            return "string"
         raise ValueError(f"Invalid type for {object}")
 
     @staticmethod
@@ -72,7 +79,8 @@ class RetoolRPC:
             )
         return item.get("title", "")
 
-    def _generate_retool_args(self, function: Function_T) -> dict[str, RetoolArgument]:
+    @classmethod
+    def _generate_retool_args(cls, function: Function_T) -> dict[str, RetoolArgument]:
         model: pydantic.BaseModel | None = getattr(function, "model", None)
         assert model is not None, "Function must have a Typing Model embedded on it"
         json_schema = model.schema()
@@ -83,9 +91,9 @@ class RetoolRPC:
             if key in InvalidModelAttributes:
                 continue
             retool_args[key] = RetoolArgument(
-                description=self._resolve_description(item, json_schema),
+                description=cls._resolve_description(item, json_schema),
                 required=key in required_items,
-                type=self._resolve_type(item),
+                type=cls._resolve_type(item, json_schema),
                 array=item.get("type") == "array",
             )
         return retool_args
