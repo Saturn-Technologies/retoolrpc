@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "retoolrpc"
-version = "0.1.2"
+version = "0.1.3"
 description = "Python package for Retool RPC"
 authors = ["tryretool <developer-api@retool.com>"]
 license = "MIT"
@@ -24,6 +24,7 @@ src = ["retoolrpc"]
 python = "^3.10"
 asyncio = "^3.4.3"
 httpx = "^0.25.0"
+pydantic = "^2.11.7"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.5.1"
